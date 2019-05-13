@@ -6,10 +6,10 @@ export const fetchTodoRequest = () =>{
   }
 }
 
-export const fetchTodoSuccess = (action) => {
+export const fetchTodoSuccess = (payload) => {
   return {
     type: actionTypes.FETCH_SUCCESS,
-    action
+    payload
   }
 } 
 // ({
@@ -24,9 +24,9 @@ export const fetchTodoError = () => ({
 export const addRequest = () => ({
   type: actionTypes.ADD_REQUEST,
 })
-export const addSuccess = (action) => ({
+export const addSuccess = (payload) => ({
   type: actionTypes.ADD_SUCCESS,
-  action,
+  payload,
 })
 export const addError = () => ({
   type: actionTypes.ADD_ERROR,

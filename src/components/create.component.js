@@ -3,7 +3,7 @@ import {addRequest, addSuccess} from '../actions/todo.action';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { reducer_add, reducer_fetch} from '../reducers/todo.reducer';
-class Create extends Component{
+export class Create extends Component{
     constructor(props) {
         super(props);
         this.onChangeName=this.onChangeName.bind(this);
@@ -16,7 +16,7 @@ class Create extends Component{
         }
     }
     componentDidMount(){
-        
+        this.props.getData();
     }
     onChangeName(t) {
         this.setState({
@@ -41,8 +41,9 @@ class Create extends Component{
             name: this.state.name,
             address: this.state.address
         };
-        axios.post('http://localhost:4000/create', obj).then(res => res).then(res => this.props.dispatch(addRequest(res)))
+        axios.post('http://localhost:4000/create', obj).then(res => this.props.dispatch(addRequest(res)))
         .catch(error => console.log(error));
+        
         this.props.getData();
     }
     render() {
@@ -73,9 +74,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        getData: () => dispatch(addRequest)
+        requestData: () => dispatch(addRequest),
+        getData: () => dispatch(addSuccess),
     }
 }
-connect(mapStateToProps, mapDispatchToProps)(Create);
-
-export default Create;
+export default connect(mapStateToProps, mapDispatchToProps)(Create);

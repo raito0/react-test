@@ -32,6 +32,7 @@ export const reducer_fetch = (state = initState, action) => {
 export const reducer_add = (state = initState, action) => {
   switch (action.type) {
     case actionTypes.ADD_REQUEST:
+      console.log('adsf');
         return {...state, isAdding:true};
       case actionTypes.ADD_SUCCESS:
         return {
