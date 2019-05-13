@@ -7,7 +7,7 @@ import Create from './components/create.component';
 import Read from './components/read.component';
 class App extends React.Component {
 	componentDidMount(){
-  	this.props.fetchPostsWithRedux()
+  	// this.props.fetchPostsWithRedux()
   }
 	render(){
 	  return (

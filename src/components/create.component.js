@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
+import {addRequest, addSuccess} from '../actions/todo.action';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { reducer_add, reducer_fetch} from '../reducers/todo.reducer';
 class Create extends Component{
     constructor(props) {
         super(props);
@@ -34,7 +37,13 @@ class Create extends Component{
         });
         // axios.post(`http://localhost:4000/create?name=${this.state.name}&address=${this.state.address}`, obj)
         // .then(res => console.log(res.data));
-        this.props.fetchPostsCreateWithRedux(this.state.name, this.state.address);
+        const obj = {
+            name: this.state.name,
+            address: this.state.address
+        };
+        axios.post('http://localhost:4000/create', obj).then(res => res).then(res => this.props.dispatch(addRequest(res)))
+        .catch(error => console.log(error));
+        this.props.getData();
     }
     render() {
         return (
@@ -57,4 +66,16 @@ class Create extends Component{
         );
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        todos: state.todos
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        getData: () => dispatch(addRequest)
+    }
+}
+connect(mapStateToProps, mapDispatchToProps)(Create);
+
 export default Create;

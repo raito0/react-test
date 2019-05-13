@@ -7,7 +7,7 @@ const initState = {
   error: false,
 };
 
-const reducer = (state = initState, action) => {
+export const reducer_fetch = (state = initState, action) => {
     switch (action.type) {
       case actionTypes.FETCH_REQUEST:
         return {
@@ -19,20 +19,26 @@ const reducer = (state = initState, action) => {
           ...state, 
           list: [
             ...state.list,
-            ...payload
+            ...action.payload
           ],
           isFetching: false
         };
       case actionTypes.FETCH_ERROR:
         return {...state, error: true};
-      case actionTypes.ADD_REQUEST:
+      default:
+        return state;
+    }
+  };
+export const reducer_add = (state = initState, action) => {
+  switch (action.type) {
+    case actionTypes.ADD_REQUEST:
         return {...state, isAdding:true};
       case actionTypes.ADD_SUCCESS:
         return {
           ...state, 
           list: [
             ...state.list,
-            ...payload
+            ...action.payload
           ],
           isAdding: true
         }
@@ -40,6 +46,6 @@ const reducer = (state = initState, action) => {
         return {...state, error: true}
       default:
         return state;
-    }
-  };
-export default reducer;
+  }
+};
+
