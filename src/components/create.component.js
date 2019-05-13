@@ -41,7 +41,7 @@ export class Create extends Component{
             name: this.state.name,
             address: this.state.address
         };
-        axios.post('http://localhost:4000/create', obj).then(res => this.props.dispatch(addRequest(res)))
+        axios.post('http://localhost:4000/create', obj).then(res=>res)
         .catch(error => console.log(error));
         
         this.props.getData();
