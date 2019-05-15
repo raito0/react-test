@@ -7,7 +7,7 @@ function* getAPI(action) {
     const data = yield call(addTodo, {name: action.name, address: action.address});
     yield put({
         type: ADD_SUCCESS,
-        data
+        payload: data
     })
 }
 export default function* () {
