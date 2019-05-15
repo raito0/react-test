@@ -24,10 +24,12 @@ export const fetchTodoError = () => ({
 export const addRequest = () => ({
   type: actionTypes.ADD_REQUEST,
 })
-export const addSuccess = (payload) => ({
-  type: actionTypes.ADD_SUCCESS,
-  payload,
-})
+export const addSuccess = (payload) => {
+  return {
+    type: actionTypes.ADD_SUCCESS,
+    payload
+  }
+} 
 export const addError = () => ({
   type: actionTypes.ADD_ERROR,
   error: true

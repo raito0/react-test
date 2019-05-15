@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {addRequest, addSuccess} from '../actions/todo.action';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { reducer_add, reducer_fetch} from '../reducers/todo.reducer';
 export class Create extends Component{
     constructor(props) {
         super(props);
@@ -16,7 +15,7 @@ export class Create extends Component{
         }
     }
     componentDidMount(){
-        this.props.getData();
+        this.props.requestData();
     }
     onChangeName(t) {
         this.setState({
@@ -30,18 +29,13 @@ export class Create extends Component{
     }
     onSubmit(t){
         t.preventDefault();
-          
-        this.setState({
-            name: this.state.name,
-            address: this.state.address,
-        });
         // axios.post(`http://localhost:4000/create?name=${this.state.name}&address=${this.state.address}`, obj)
         // .then(res => console.log(res.data));
         const obj = {
             name: this.state.name,
             address: this.state.address
         };
-        axios.post('http://localhost:4000/create', obj).then(res=>res)
+        axios.post(`http://localhost:4000/create?name=${this.state.name}&address=${this.state.address}`, obj).then(res=>res)
         .catch(error => console.log(error));
         
         this.props.getData();
