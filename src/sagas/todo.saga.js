@@ -4,10 +4,10 @@ import {
 import { ADD_SUCCESS } from '../constants/todo.constant';
 import { addTodo } from '../services/todo.service';
 function* getAPI(action) {
-    const requestData = yield call(addTodo, {name: action.name, address: action.address});
+    const data = yield call(addTodo, {name: action.name, address: action.address});
     yield put({
         type: ADD_SUCCESS,
-        requestData
+        data
     })
 }
 export default function* () {
